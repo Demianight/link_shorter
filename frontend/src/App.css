@@ -1,0 +1,11 @@
+body {
+  background: linear-gradient(#e66465, #9198e5);
+  background-attachment: fixed;
+}
+
+.text_with_1px_border {
+  -webkit-text-stroke: 1px black;
+
+  font-family: sans;
+  color: white;
+}
