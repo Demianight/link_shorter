@@ -1,2 +1,14 @@
 ###
-GET http://127.0.0.1:8000/links
+GET http://127.0.0.1:8000/links/
+
+###
+POST http://127.0.0.1:8000/links/
+Content-Type: application/json
+
+{
+    "original_url": "https://google.com",
+    "name": "Demian"
+}
+
+###
+GET http://127.0.0.1:8000/links/e27969ce-b741-4f1d-92cf-e7532d1365bd
