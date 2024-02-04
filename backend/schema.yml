@@ -1,0 +1,110 @@
+openapi: 3.0.3
+info:
+  title: ''
+  version: 0.0.0
+paths:
+  /links/:
+    get:
+      operationId: links_list
+      tags:
+      - links
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Link'
+          description: ''
+    post:
+      operationId: links_create
+      tags:
+      - links
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Link'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Link'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Link'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+          description: ''
+  /links/{id}/:
+    get:
+      operationId: links_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this link.
+        required: true
+      tags:
+      - links
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+          description: ''
+components:
+  schemas:
+    Link:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        original_url:
+          type: string
+          format: uri
+          maxLength: 200
+        fake_url:
+          type: string
+          format: uri
+          nullable: true
+          maxLength: 200
+        slug:
+          type: string
+          nullable: true
+          maxLength: 50
+          pattern: ^[-a-zA-Z0-9_]+$
+        name:
+          type: string
+          maxLength: 32
+      required:
+      - id
+      - name
+      - original_url
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
